@@ -53,19 +53,30 @@ void testFunctions(){
 
 //the above are useful for caesar ciphers, but in the main function we will be using these for vigenere ciphers, which are a type of caesar cipher
 
+string filterKey(string key) {
+    string filteredKey = "";
+    for (char c : key) {
+        if (isalpha(c)) {
+            filteredKey += c;
+        }
+    }
+    return filteredKey;
+}
+
 
 //main vigenere function
 string vigenereEncrypt(string inputMessage, string key) {
-    int keyLength = key.length();
+    string filteredKey = filterKey(key);
+    int keyLength = filteredKey.length();
     string outputMessage = "";
     int keyPos = 0;
 
     for (char c : inputMessage) {
         if (isalpha(c)) {
-        int shiftVal = getShift(key[keyPos % keyLength]); //modulo wraps around the key
+        int shiftVal = getShift(filteredKey[keyPos % keyLength]); //modulo wraps around the key
         char shiftedChar = mapShift(c, shiftVal);
 
-        cout << "KEY: Shift value for char " << key[keyPos % keyLength] << " is " << shiftVal << endl;
+        cout << "KEY: Shift value for char " << filteredKey[keyPos % keyLength] << " is " << shiftVal << endl;
         cout << "TEXT: Shifting " << c << " by " << shiftVal << ". End result is: " << shiftedChar << endl;
 
         outputMessage += shiftedChar;
@@ -81,16 +92,17 @@ string vigenereEncrypt(string inputMessage, string key) {
 }
 
 string vigenereDecrypt(string inputMessage, string key) {
-    int keyLength = key.length();
+    string filteredKey = filterKey(key);
+    int keyLength = filteredKey.length();
     string outputMessage = "";
     int keyPos = 0;
 
     for (char c : inputMessage) {
         if (isalpha(c)) {
-            int shiftVal = getShift(key[keyPos % keyLength]); //modulo wraps around the key
+            int shiftVal = getShift(filteredKey[keyPos % keyLength]); //modulo wraps around the key
             char shiftedChar = reverseShift(c, shiftVal);
 
-            cout << "KEY: Shift value for char " << key[keyPos % keyLength] << " is " << shiftVal << endl;
+            cout << "KEY: Shift value for char " << filteredKey[keyPos % keyLength] << " is " << shiftVal << endl;
             cout << "TEXT: Shifting " << c << " by " << shiftVal << ". End result is: " << shiftedChar << endl;
 
             outputMessage += shiftedChar;

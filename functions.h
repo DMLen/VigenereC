@@ -17,5 +17,6 @@ void testFunctions();
 //vigenere functions
 string vigenereEncrypt(string inputMessage, string key);
 string vigenereDecrypt(string inputMessage, string key);
+string filterKey(string key);
 
 #endif // FUNCTIONS_H
