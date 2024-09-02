@@ -45,18 +45,16 @@ void testFunctions(){
 string vigenere(string inputMessage, string key) {
     int keyLength = key.length();
     string outputMessage = "";
-    int textPos = 1; //position of current character in the key
-    int keyPos = 1;
+    int keyPos = 0;
 
     for (char c : inputMessage) {
-        int shiftVal = getShift(key[keyPos-1]);
+        int shiftVal = getShift(key[keyPos % keyLength]); //modulo wraps around the key
         char shiftedChar = mapShift(c, shiftVal);
 
-        cout << "KEY: Shift value for char " << key[keyPos-1] << " is " << shiftVal << endl;
+        cout << "KEY: Shift value for char " << key[keyPos % keyLength] << " is " << shiftVal << endl;
         cout << "TEXT: Shifting " << c << " by " << shiftVal << ". End result is: " << shiftedChar << endl;
 
         outputMessage += shiftedChar;
-        textPos += 1;
         keyPos += 1;
     }
     

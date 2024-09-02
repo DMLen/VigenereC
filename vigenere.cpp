@@ -18,7 +18,7 @@ int main()
     cout << "Enter the MESSAGE text for encryption/decryption: ";
     cin >> inputMessage;
 
-    cout << "Enter the KEY text for encryption/decryption: ";
+    cout << "Enter the KEY text: ";
     cin >> key;
 
     if (mode == 1)
