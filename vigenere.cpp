@@ -7,12 +7,13 @@ int main()
 {
 
     testFunctions();
+    start:
 
     string inputMessage; //message we want to encrypt/decrypt
     string key; //the "key" we will encrypt/decrypt with, based on the vigenere cipher
     int mode;
 
-    cout << "Run Vigenere in encryption mode [1] or decryption mode [2]?: ";
+    cout << "Run VigenereC in encryption mode [1] or decryption mode [2]?: ";
     cin >> mode;
     cin.ignore();
 
@@ -31,5 +32,17 @@ int main()
     {
         string output = vigenereDecrypt(inputMessage, key);
         cout << "Decrypted text: " << output << endl;
+    }
+
+    char response;
+    cout << "Enter [R] to restart or any other key to exit: ";
+    cin >> response;
+    cin.ignore();
+
+    if (response == 'R' || response == 'r')
+    {
+        goto start;
+    } else {
+        return 0;
     }
 }
