@@ -14,12 +14,13 @@ int main()
 
     cout << "Run Vigenere in encryption mode [1] or decryption mode [2]?: ";
     cin >> mode;
+    cin.ignore();
 
     cout << "Enter the MESSAGE text for encryption/decryption: ";
-    cin >> inputMessage;
+    getline(cin, inputMessage);
 
     cout << "Enter the KEY text: ";
-    cin >> key;
+    getline(cin, key);
 
     if (mode == 1)
     {

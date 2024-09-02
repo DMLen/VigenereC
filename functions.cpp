@@ -8,7 +8,7 @@ using namespace std;
 int getShift(char inputLetter) {
     char input = tolower(inputLetter); //convert to lowercase
 
-    int shiftVal = int(input)-97; //convert to ascii value and subtract to get positional value of letter
+    int shiftVal = int(input)-'a'; //convert to ascii value and subtract to get positional value of letter
     return shiftVal;
 }
 
@@ -24,14 +24,16 @@ char mapShift(char inputLetter, int shift) {
 }
 
 //do reverse
-char reverseShift(char inputLetter, int shift){
-    char input = tolower(inputLetter);
-    char lowerShift = tolower(shift);
-
-    int inputPos = getShift(input);
-    int outputPos = (inputPos - lowerShift) % 26;
-    char outputLetter = char(outputPos + 97);
-    return outputLetter;
+char reverseShift(char inputLetter, int shift) {
+    if (isupper(inputLetter)) {
+        int inputPos = inputLetter - 'A'; //ascii of capital A is 65
+        int outputPos = (inputPos - shift + 26) % 26; // +26 to handle negative values, which otherwise enter ascii range of capital letters
+        return 'A' + outputPos;
+    } else {
+        int inputPos = inputLetter - 'a'; //67
+        int outputPos = (inputPos - shift + 26) % 26;
+        return 'a' + outputPos; //regardless of input case we will get output of lower
+    }
 }
 
 //testing function
@@ -59,6 +61,7 @@ string vigenereEncrypt(string inputMessage, string key) {
     int keyPos = 0;
 
     for (char c : inputMessage) {
+        if (isalpha(c)) {
         int shiftVal = getShift(key[keyPos % keyLength]); //modulo wraps around the key
         char shiftedChar = mapShift(c, shiftVal);
 
@@ -67,6 +70,11 @@ string vigenereEncrypt(string inputMessage, string key) {
 
         outputMessage += shiftedChar;
         keyPos += 1;
+        }
+
+        else {
+            outputMessage += c; //nonalpha characters are preserved
+        }
     }
     
     return outputMessage;
@@ -78,14 +86,20 @@ string vigenereDecrypt(string inputMessage, string key) {
     int keyPos = 0;
 
     for (char c : inputMessage) {
-        int shiftVal = getShift(key[keyPos % keyLength]); //modulo wraps around the key
-        char shiftedChar = reverseShift(c, shiftVal);
+        if (isalpha(c)) {
+            int shiftVal = getShift(key[keyPos % keyLength]); //modulo wraps around the key
+            char shiftedChar = reverseShift(c, shiftVal);
 
-        cout << "KEY: Shift value for char " << key[keyPos % keyLength] << " is " << shiftVal << endl;
-        cout << "TEXT: Shifting " << c << " by " << shiftVal << ". End result is: " << shiftedChar << endl;
+            cout << "KEY: Shift value for char " << key[keyPos % keyLength] << " is " << shiftVal << endl;
+            cout << "TEXT: Shifting " << c << " by " << shiftVal << ". End result is: " << shiftedChar << endl;
 
-        outputMessage += shiftedChar;
-        keyPos += 1;
+            outputMessage += shiftedChar;
+            keyPos += 1;
+        }
+
+        else {
+            outputMessage += c; //nonalpha characters are preserved
+        }
     }
     
     return outputMessage;
