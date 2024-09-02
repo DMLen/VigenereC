@@ -8,11 +8,14 @@ int getShift(char letter);
 
 //given a letter and a number to shift by, find the new resulting letter
 char mapShift(char letter, int shift);
+//do reverse (backwards shift)
+char reverseShift(char letter, int shift);
 
 //testing function
 void testFunctions();
 
-//vigenere function
-string vigenere(string inputMessage, string key);
+//vigenere functions
+string vigenereEncrypt(string inputMessage, string key);
+string vigenereDecrypt(string inputMessage, string key);
 
 #endif // FUNCTIONS_H

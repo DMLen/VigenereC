@@ -23,6 +23,17 @@ char mapShift(char inputLetter, int shift) {
     return outputLetter;
 }
 
+//do reverse
+char reverseShift(char inputLetter, int shift){
+    char input = tolower(inputLetter);
+    char lowerShift = tolower(shift);
+
+    int inputPos = getShift(input);
+    int outputPos = (inputPos - lowerShift) % 26;
+    char outputLetter = char(outputPos + 97);
+    return outputLetter;
+}
+
 //testing function
 void testFunctions(){
     cout << "==TESTING FUNCTIONS OUTPUT==" << endl;
@@ -42,7 +53,7 @@ void testFunctions(){
 
 
 //main vigenere function
-string vigenere(string inputMessage, string key) {
+string vigenereEncrypt(string inputMessage, string key) {
     int keyLength = key.length();
     string outputMessage = "";
     int keyPos = 0;
@@ -50,6 +61,25 @@ string vigenere(string inputMessage, string key) {
     for (char c : inputMessage) {
         int shiftVal = getShift(key[keyPos % keyLength]); //modulo wraps around the key
         char shiftedChar = mapShift(c, shiftVal);
+
+        cout << "KEY: Shift value for char " << key[keyPos % keyLength] << " is " << shiftVal << endl;
+        cout << "TEXT: Shifting " << c << " by " << shiftVal << ". End result is: " << shiftedChar << endl;
+
+        outputMessage += shiftedChar;
+        keyPos += 1;
+    }
+    
+    return outputMessage;
+}
+
+string vigenereDecrypt(string inputMessage, string key) {
+    int keyLength = key.length();
+    string outputMessage = "";
+    int keyPos = 0;
+
+    for (char c : inputMessage) {
+        int shiftVal = getShift(key[keyPos % keyLength]); //modulo wraps around the key
+        char shiftedChar = reverseShift(c, shiftVal);
 
         cout << "KEY: Shift value for char " << key[keyPos % keyLength] << " is " << shiftVal << endl;
         cout << "TEXT: Shifting " << c << " by " << shiftVal << ". End result is: " << shiftedChar << endl;

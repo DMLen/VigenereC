@@ -23,10 +23,12 @@ int main()
 
     if (mode == 1)
     {
-        cout << "Encrypted text: " << vigenere(inputMessage, key) << endl;
+        string output = vigenereEncrypt(inputMessage, key);
+        cout << "Encrypted text: " << output << endl;
     }
     else
     {
-        cout << "Decrypted text: " << vigenere(inputMessage, key) << endl; //UNIMPLEMENTED!!!  
+        string output = vigenereDecrypt(inputMessage, key);
+        cout << "Decrypted text: " << output << endl;
     }
 }
