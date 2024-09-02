@@ -5,11 +5,9 @@ This is capable of encoding and decoding plaintext using Vigenère's cipher, whi
 Verify results against [University of Denver's Vigenère encoder/decoder](https://www.cs.du.edu/~snarayan/crypt/vigenere.html)
 
 (Note: In each of these cases, the Key is used to encrypt as well as decrypt)
-Message: attacking tonight
-Key: OCULORHINOLARINGOLOGY
-Encrypted: ovnlqbpvt hznzouz
 
-Message: Humpty Dumpty sat on a wall
-Key: egg
-Encrypted: lastze hastze wgz st g agrp
+| Plaintext  | Key | Ciphertext |
+| ------------- | ------------- | ------------- |
+| attacking tonight | OCULORHINOLARINGOLOGY | ovnlqbpvt hznzouz |
+| Humpty Dumpty sat on a wall  | egg  | lastze hastze wgz st g agrp |
 
