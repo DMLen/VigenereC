@@ -6,10 +6,15 @@ using namespace std;
 
 //function to find the shift value based of a letter
 int getShift(char inputLetter) {
-    char input = tolower(inputLetter); //convert to lowercase
+    if (isdigit(inputLetter)) {
+        return inputLetter - '0'; //if the key value is a digit, we will just return that as shift value. ascii of '0' is subtracted from digit to get the actual number
+    } else {
 
+    char input = tolower(inputLetter); //convert to lowercase
     int shiftVal = int(input)-'a'; //convert to ascii value and subtract to get positional value of letter
     return shiftVal;
+
+    }
 }
 
 //given a letter and a number to shift by, find the new resulting letter
@@ -45,6 +50,9 @@ void testFunctions(){
         int shift2 = getShift('B');
         cout << "ShiftVal for B: " << shift2 << endl;
 
+        int shift3 = getShift('5');
+        cout << "ShiftVal for 5: " << shift3 << endl;
+
         cout << "Mapping A with shift of 1: " << mapShift('A', 1) << endl;
         cout << "Mapping B with shift of 2: " << mapShift('B', 2) << endl;
         cout << "Mapping Z with shift of 1: " << mapShift('Z', 1) << endl;
@@ -56,7 +64,7 @@ void testFunctions(){
 string filterKey(string key) {
     string filteredKey = "";
     for (char c : key) {
-        if (isalpha(c)) {
+        if (isalpha(c) || isdigit(c)) {
             filteredKey += c;
         }
     }
